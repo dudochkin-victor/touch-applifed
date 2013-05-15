@@ -1,0 +1,3 @@
+PRESTART=/usr/share/applifed-M-testscripts/periodic_re_prestart/periodic_re_prestart.conf
+SCREEN_BLANKED_WITH_DELAY=25
+EXIT_WITH_DELAY=50

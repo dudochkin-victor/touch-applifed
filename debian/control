@@ -1,0 +1,72 @@
+Source: applifed
+Section: admin
+Priority: important
+Maintainer: Jussi Lind <jussi.lind@nokia.com>
+Build-Depends: cmake (>= 2.6.0), debhelper (>= 7), libqt4-dev (>= 4.6.3~), libx11-dev, libmeegotouch-dev, libcontextsubscriber-dev
+Standards-Version: 3.8.0
+
+Package: applifed
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Application life-cycle daemon
+ Application life-cycle daemon that manages prestarted applications.
+
+Package: applifed-tests
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmeegotouchcore0, libmeegotouchviews0, libmeegotouchextensions0, libmeegotouchsettings0, testrunner-lite, applifed, ci-testing 
+XB-Maemo-CI-Packages: applifed
+XB-Maemo-CI-Stage: fast, staging
+Description: applifed unit tests
+ Unit testing binaries and shellscripts for testing applifed. 
+
+Package: applifed-testapps
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmeegotouchcore0, libmeegotouchviews0, libmeegotouchextensions0, libmeegotouchsettings0, testrunner-lite, applifed
+Description: applifed testapps
+ Test applications for testing applifed.
+
+Package: applifed-testscripts
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, testrunner-lite, applifed-testapps, ci-testing, testability-driver, meego-env, mcetools (>= 1.10.40), python, ruby
+Description: applifed testscripts
+ Test scripts for testing applifed.
+
+Package: applifed-functional-tests
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, applifed-testapps, applifed-testscripts
+XB-Maemo-CI-Packages: applifed
+XB-Maemo-CI-Stage: fast, staging
+Description: applifed functional tests
+ Functional tests for testing applifed.
+
+Package: applifed-art-tests
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, applifed-testapps, applifed-testscripts
+XB-Maemo-CI-Packages: applifed
+XB-Maemo-CI-Stage: acceptance, validation
+Description: applifed ART tests
+ ART tests for testing applifed.
+
+Package: applifed-bug-tests
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, applifed-testapps, applifed-testscripts
+XB-Maemo-CI-Packages: applifed
+XB-Maemo-CI-Stage: fast, staging
+Description: applifed bug tests
+ Tests related to some bugs for testing applifed.
+
+Package: applifed-performance-tests
+Section: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, applifed-testapps, applifed-testscripts, applauncherd-testscripts (>=0.15.3), applauncherd-testapps (>=0.15.3)
+XB-Maemo-CI-Packages: applifed
+XB-Maemo-CI-Stage: fast, staging 
+Description: applifed performance tests
+ Performance tests for testing applifed. 
+

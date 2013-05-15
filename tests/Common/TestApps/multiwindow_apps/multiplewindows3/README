@@ -1,0 +1,17 @@
+README
+------
+
+Multiwindow test application that supports prestarting.
+
+Command to launch application using specific window (the last paramater is 
+the window id to show):
+
+dbus-send --dest=com.nokia.MultiWindow3 --type="method_call" / com.nokia.MultipleWindowsIf.launchWindow int32:"2"
+
+Application supports 3 window id's: 1, 2 and 3.
+
+Window 3 is inherited from the MApplication window and it shows an example how to override QWidget::closeEvent().
+
+Application could be started with the switch "-output-level debug" to get information what happens inside it.
+
+

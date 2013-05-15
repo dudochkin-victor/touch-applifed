@@ -1,0 +1,5 @@
+PRESTART=/usr/share/applifed-testscripts/functest_applifed.conf
+EXIT_WITH_DELAY=50
+
+
+

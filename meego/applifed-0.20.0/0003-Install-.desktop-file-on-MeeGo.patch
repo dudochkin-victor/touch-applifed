@@ -1,0 +1,37 @@
+From a90fb16d27d979125998294fa3d2d87c1e5ad115 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Pertti=20Kellom=C3=A4ki?= <pertti.kellomaki@nokia.com>
+Date: Fri, 17 Sep 2010 14:57:16 +0300
+Subject: [PATCH] Install .desktop file on MeeGo.
+
+---
+ CMakeLists.txt         |    5 +++++
+ meego/applifed.desktop |    4 ++++
+ 2 files changed, 9 insertions(+), 0 deletions(-)
+ create mode 100644 meego/applifed.desktop
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f279246..586387f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -55,3 +55,8 @@ if ($ENV{MEEGO})
+ else (NOT $ENV{MEEGO})
+         install(FILES prestart/nokia.conf DESTINATION /etc/prestart)
+ endif ($ENV{MEEGO})
++
++# On MeeGo, install a .desktop file to autostart applifed.
++if ($ENV{MEEGO})
++        install(FILES meego/applifed.desktop DESTINATION /etc/xdg/autostart)
++endif ($ENV{MEEGO})
+diff --git a/meego/applifed.desktop b/meego/applifed.desktop
+new file mode 100644
+index 0000000..eb31be8
+--- /dev/null
++++ b/meego/applifed.desktop
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++Exec=/usr/bin/applifed
++X-Moblin-Priority=High
++OnlyShowIn=X-MEEGO-HS;
+-- 
+1.7.0.4
+

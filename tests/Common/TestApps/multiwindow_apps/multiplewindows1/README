@@ -1,0 +1,18 @@
+README
+------
+
+Multiwindow test application that supports prestarting. 
+
+Prestart support is implemented using the inheritance approach (custom application
+inherited from MApplication). Used mode is M::LazyShutdownMultiWindow, so the 
+application never *really* exits. Only the windows are hidden and reset.
+
+Command to launch application using specific window (the last paramater is the 
+window id to show):
+
+dbus-send --dest=com.nokia.MultiWindow1 --type="method_call" / com.nokia.MultipleWindowsIf.launchWindow int32:"2"
+
+Application supports 3 window id's: 1, 2 and 3.
+
+Application can be started with the switch "-output-level debug" to get information what happens inside it.
+

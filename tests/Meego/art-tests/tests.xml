@@ -1,0 +1,58 @@
+
+<testdefinition version="0.1">
+
+<!-- Test suite, name mandatory - the same as test package name -->
+  <!-- Schema: https://projects.maemo.org/docs/testing/xml-definition.html -->
+  <suite name="applifed-M-art-test" domain="Application framework"> 
+
+    <!-- At least one set per suite, name and description mandatory -->
+    <set name="Installation-tests" description="Installation-ok tests" feature="AF Application prestarting functionality (basic)" requirement="3O0105">   
+
+      <!-- Possibly some pre-steps to execute before running the test cases -->
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+      </pre_steps>
+
+      <!-- At least one case per set, name mandatory, description mandatory, other optional -->
+      <!-- At least one step per test, expected_result optional - tells which return code is considered passed -->
+
+      <case name="applifed2" type="Functional" description="Check that exactly one applifed is running" timeout="360" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby /usr/share/applifed-M-testscripts/tc_applifed_one_instance.rb --name test_only_one_applifed</step>
+      </case>
+
+      <!-- Environments optional - tells where the tests are run -->
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+   
+    </set>
+
+    <set name="Applifed-TDriver-Tests" description="Functional tests for applifed with TDriver tool" feature="AF Application prestarting functionality (basic)" requirement="3O0105">   
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+      </pre_steps>
+
+      <case name="Re-Prestart" type="Functional" description="To test that the application is re-prestarted by applifed" timeout="360" level="System">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_re_prestart</step>
+      </case>
+      <case name="Prestart" type="Functional" description="To test that the application is prestarted by applifed" timeout="360" level="System">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_prestart</step>
+      </case>
+      <case name="Kill-Re-Prestart" type="Functional" description="To test that the application is re-prestarted by applifed after they are killed" timeout="360" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_kill_re_prestart</step>
+      </case>
+
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <!--get>
+          <file> /tmp/applifed-test.log</file>
+      </get-->
+    </set>
+  </suite>
+</testdefinition>
+
+

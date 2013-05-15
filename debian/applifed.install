@@ -1,0 +1,6 @@
+# Daemon binary
+usr/bin/applifed
+
+# Configuration file
+etc/prestart/nokia.conf
+

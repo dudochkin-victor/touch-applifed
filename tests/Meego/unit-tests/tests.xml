@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<testdefinition version="0.1">
+
+<!-- Test suite, name mandatory - the same as test package name -->
+  <!-- Schema: https://projects.maemo.org/docs/testing/xml-definition.html -->
+  <suite name="applifed-tests" domain="Application framework"> 
+
+    <!-- At least one set per suite, name and description mandatory -->
+    <set name="Unit-tests" description="Unit tests for applifed" feature="AF Application prestarting functionality (basic)" requirement="300105"> 
+
+      <!-- At least one case per set, name mandatory, description mandatory, other optional -->
+      <!-- At least one step per test, expected_result optional - tells which return code is considered passed -->
+
+      <case name="Prestarter" type="Functional" description="Unit tests for Prestarter class" level="Component" timeout="20">
+          <step expected_result="0">su - meego -c "source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-tests/ut_prestarter"</step>
+      </case>
+
+      <case name="PrestartApp" type="Functional" description="Unit tests for PrestartApp class" level="Component" timeout="20">
+          <step expected_result="0">su - meego -c "source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-tests/ut_prestartapp"</step>
+      </case>
+
+      <case name="ConfigData" type="Functional" description="Unit tests for ConfigData class" level="Component" timeout="20">
+          <step expected_result="0">su - meego -c "source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-tests/ut_configdata"</step>
+      </case>
+
+      <case name="CPULoad" type="Functional" description="Unit tests for CPULoad class" level="Component" timeout="20">
+          <step expected_result="0">su - meego -c "source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-tests/ut_cpuload"</step>
+      </case>
+
+      <!-- Environments optional - tells where the tests are run -->
+      <environments>
+          <scratchbox>true</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+   
+    </set>
+
+    <set name="Unit-tests_for_CPU_load" description="Unit tests for applifed CPU load feature" feature="AF Application pre-starting enhancements" requirement="300137"> 
+
+      <!-- At least one case per set, name mandatory, description mandatory, other optional -->
+      <!-- At least one step per test, expected_result optional - tells which return code is considered passed -->
+
+      <case name="ConfigData" type="Functional" description="Unit tests for ConfigData class" level="Component" timeout="20">
+          <step expected_result="0">su - meego -c "source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-tests/ut_configdata"</step>
+      </case>
+
+      <!-- Environments optional - tells where the tests are run -->
+      <environments>
+          <scratchbox>true</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+   
+    </set>
+
+  </suite>
+</testdefinition>
+
+

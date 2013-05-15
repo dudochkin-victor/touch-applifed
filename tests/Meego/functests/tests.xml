@@ -1,0 +1,129 @@
+
+<testdefinition version="0.1">
+
+<!-- Test suite, name mandatory - the same as test package name -->
+  <!-- Schema: https://projects.maemo.org/docs/testing/xml-definition.html -->
+  <suite name="applifed-M-functioanl-tests" domain="Application framework"> 
+
+    <!-- At least one set per suite, name and description mandatory -->
+    <set name="Installation-tests" description="Installation-ok tests" feature="AF Application prestarting functionality (basic)" requirement="3O0105">   
+
+      <!-- Possibly some pre-steps to execute before running the test cases -->
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+          <step>/usr/share/applifed-M-testscripts/cp-service.rb</step>
+      </pre_steps>
+
+      <!-- At least one case per set, name mandatory, description mandatory, other optional -->
+      <!-- At least one step per test, expected_result optional - tells which return code is considered passed -->
+
+      <case name="applifed2" type="Functional" description="Check that exactly one applifed is running" timeout="360" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/tc_applifed_one_instance.rb</step>
+      </case>
+
+      <case name="applifed-daemonized" type="Functional" description="Check that fork parameter works" timeout="120" level="System">
+        <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/tc_daemonize.rb</step>
+      </case>
+
+      <!-- Environments optional - tells where the tests are run -->
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+   
+    </set>
+
+    <set name="Applifed-TDriver-Tests" description="Functional tests for applifed with TDriver tool" feature="AF Application prestarting functionality (basic)" requirement="3O0105">   
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+      </pre_steps>
+
+      <case name="Re-Prestart" type="Functional" description="To test that the application is re-prestarted by applifed" timeout="360" level="System">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_re_prestart</step>
+      </case>
+
+      <case name="Prestart" type="Functional" description="To test that the application is prestarted by applifed" timeout="360" level="System">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_prestart</step>
+      </case>
+
+      <case name="Kill-Re-Prestart" type="Functional" description="To test that the application is re-prestarted by applifed after they are killed" timeout="360" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_kill_re_prestart</step>
+      </case>
+
+      <!--This test is diabled for the time being for further investigation.Before enabling it needs some modifications -->
+      <case name="Multi-Instance-Prestart" type="Functional" description="To test that n number of application is prestarted by applifed" timeout="360" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_prestart.rb --name test_multi_instance_prestart</step>
+      </case>
+
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <!--get>
+          <file> /tmp/applifed-test.log</file>
+      </get-->
+    </set>
+
+    <set name="Multiwindow-Tests" description="Functional tests for applifed for multiwindow applications" feature="AF Application pre-starting enhancements" requirement="3O0137">   
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+      </pre_steps>
+
+      <case name="MW3_Prestart" type="Functional" description="Test for a multiwindow application inherited from MApplication tested" timeout="360" level="System" insignificant="true">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_mwtests.rb --name test_mw3_prestart</step>
+      </case>
+      <case name="MW3_Switcher" type="Functional" description="Test that all window of a multiwindow application exists in the switcher" timeout="360" level="System" insignificant="true">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_mwtests.rb --name test_mw3_switcher</step>
+      </case>
+      <case name="MW2_Re_Prestart" type="Functional" description="Test for multiwindow re-prestart" timeout="360" level="System" insignificant="true">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_mwtests.rb --name test_mw2_close</step>
+      </case>
+      <case name="MW1_Content" type="Functional" description="Test for multiwindow contents" timeout="360" level="System" insignificant="true">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_mwtests.rb --name test_mw1_content</step>
+      </case>
+      <case name="MW1_Prestart" type="Functional" description="Test for multiwindow prestart and lazy shutdown" timeout="360" level="System" insignificant="true">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_mwtests.rb --name test_mw1_close</step>
+      </case>
+      <case name="CloseEvent_Prestart" type="Functional" description="Test to hide and close a prestarted application" timeout="360" level="System" insignificant="false">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/ts_mwtests.rb --name test_close_event</step>
+      </case>
+
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <get>
+          <file>/tmp/mw_applifed_result.txt</file>
+      </get>
+    </set>
+
+    <set name="CPU_LOAD_TESTS" description="Functional tests for applifed for cpu load prestarting" feature="AF Application pre-starting enhancements" requirement="3O0137">   
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+      </pre_steps>
+
+      <case name="LOW_CPULOAD" type="Functional" description="Test that a applications are prestarted when the cpu load is lower than threshold value" timeout="360" level="System">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/cpu_load/tc_cpu_load.rb --name test_cpu_load_low</step>
+      </case>
+      <case name="HIGH_CPULOAD" type="Functional" description="Test that applications are not prestarted when the cpu load is higher than threshold value" timeout="360" level="System">
+	      <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 ruby  /usr/share/applifed-M-testscripts/cpu_load/tc_cpu_load.rb --name test_cpu_load_high</step>
+      </case>
+      
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <get>
+          <file>/tmp/cpuload_low.log</file>
+          <file> /tmp/cpuload_high.log</file>
+      </get>
+    </set>
+
+
+  </suite>
+</testdefinition>
+
+

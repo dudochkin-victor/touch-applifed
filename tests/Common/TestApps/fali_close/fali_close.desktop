@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=fali_close
+Icon=icon-l-video
+Exec=fali_close
+X-Maemo-Service=com.nokia.fali_close
+Categories=X-MeeGo;Demos;
+OnlyShowIn=X-MeeGo;

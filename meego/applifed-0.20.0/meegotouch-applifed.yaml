@@ -1,0 +1,84 @@
+Name: meegotouch-applifed
+Summary: Application life cycle daemon
+Version: 0.20.0
+Release: 1
+Group: System/Daemons
+License: LGPLv2+
+URL: http://meego.gitorious.com/meegotouch/meegotouch-applifed
+Sources:
+    - "%{name}-%{version}.tar.bz2"
+Patches:
+    - "0001-Use-usr-bin-ruby-instead-of-usr-bin-ruby1.8.patch"
+    - "0002-Ship-empty-conf-file-in-MeeGo.patch"
+    - "0003-Install-.desktop-file-on-MeeGo.patch"
+Description: applifed is an application life cycle daemon. It manages prestarted applications.
+PkgConfigBR:
+    - QtGui
+    - contextprovider-1.0
+    - meegotouch
+    - x11
+PkgBR:
+    - cmake
+Builder: make
+Files:
+    - "%{_bindir}/applifed"
+    - "%config %{_sysconfdir}/prestart/nokia.conf"
+    - "%config %{_sysconfdir}/xdg/autostart/applifed.desktop"
+SubPackages:
+    - Name: tests
+      Group: Development/Tools
+      Summary: Tests for meegotouch-applifed
+      Description: |
+         Testing related files for meegotouch-applifed.
+      Files:
+       - "%{_bindir}/applifed"
+       - "%{_bindir}/close-event"
+       - "%{_bindir}/fali_hello"
+       - "%{_bindir}/fali_multiapp"
+       - "%{_bindir}/fali_mw1"
+       - "%{_bindir}/fali_mw2"
+       - "%{_bindir}/fali_mw3"
+       - "%{_bindir}/fali_perf"
+       - "%{_bindir}/fali_toc"
+       - "%{_bindir}/memoryhog"
+       - "%{_datadir}/applications/fali_hello.desktop"
+       - "%{_datadir}/applications/fali_toc.desktop"
+       - "%{_datadir}/applifed-art-tests/tests.xml"
+       - "%{_datadir}/applifed-bug-tests/tests.xml"
+       - "%{_datadir}/applifed-functional-tests/tests.xml"
+       - "%{_datadir}/applifed-performance-tests/tests.xml"
+       - "%{_datadir}/applifed-tests"
+       - "%{_libdir}/applifed-tests/tests.xml"
+       - "%{_libdir}/applifed-tests/ut_configdata"
+       - "%{_libdir}/applifed-tests/ut_cpuload"
+       - "%{_libdir}/applifed-tests/ut_prestartapp"
+       - "%{_libdir}/applifed-tests/ut_prestarter"
+       - "%{_datadir}/applifed-testscripts/cp-service.rb"
+       - "%{_datadir}/applifed-testscripts/cpu_load/cpu_load.conf"
+       - "%{_datadir}/applifed-testscripts/cpu_load/cpu_load_high.drive"
+       - "%{_datadir}/applifed-testscripts/cpu_load/cpu_load_low.drive"
+       - "%{_datadir}/applifed-testscripts/cpu_load/tc_cpu_load.rb"
+       - "%{_datadir}/applifed-testscripts/fautils.rb"
+       - "%{_datadir}/applifed-testscripts/functest_applifed.conf"
+       - "%{_datadir}/applifed-testscripts/functional.drive"
+       - "%{_datadir}/applifed-testscripts/periodic_re_prestart/periodic_re_prestart.conf"
+       - "%{_datadir}/applifed-testscripts/periodic_re_prestart/periodic_re_prestart.drive"
+       - "%{_datadir}/applifed-testscripts/periodic_re_prestart/ts_periodic_re_prestart.rb"
+       - "%{_datadir}/applifed-testscripts/prevent.conf"
+       - "%{_datadir}/applifed-testscripts/prevent.drive"
+       - "%{_datadir}/applifed-testscripts/sbservice/com.nokia.fali_hello.service.sb"
+       - "%{_datadir}/applifed-testscripts/sbservice/com.nokia.fali_toc.service.sb"
+       - "%{_datadir}/applifed-testscripts/tc_applifed_one_instance.rb"
+       - "%{_datadir}/applifed-testscripts/tc_daemonize.rb"
+       - "%{_datadir}/applifed-testscripts/tc_prestart_preventing.rb"
+       - "%{_datadir}/applifed-testscripts/test-perf-prestart.py"
+       - "%{_datadir}/applifed-testscripts/test-perf-prestart.pyc"
+       - "%{_datadir}/applifed-testscripts/test-perf-prestart.pyo"
+       - "%{_datadir}/applifed-testscripts/ts_mwtests.rb"
+       - "%{_datadir}/applifed-testscripts/ts_prestart.rb"
+       - "%{_datadir}/dbus-1/services/com.nokia.fali_hello.service"
+       - "%{_datadir}/dbus-1/services/com.nokia.fali_mw1.service"
+       - "%{_datadir}/dbus-1/services/com.nokia.fali_mw2.service"
+       - "%{_datadir}/dbus-1/services/com.nokia.fali_mw3.service"
+       - "%{_datadir}/dbus-1/services/com.nokia.fali_perf.service"
+       - "%{_datadir}/dbus-1/services/com.nokia.fali_toc.service"

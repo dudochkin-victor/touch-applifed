@@ -1,0 +1,35 @@
+
+<testdefinition version="0.1">
+
+<!-- Test suite, name mandatory - the same as test package name -->
+  <!-- Schema: https://projects.maemo.org/docs/testing/xml-definition.html -->
+  <suite name="applifed-bug-tests" domain="Application framework"> 
+
+    <set name="Bug-Tests" description="Functional tests for applifed for multiwindow applications" feature="AF Application pre-starting enhancements" requirement="3O0137">   
+      <pre_steps>
+          <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+      </pre_steps>
+
+      <case name="Multi-Instance-Prestart" type="Functional" description="To test that n number of application is prestarted by applifed" timeout="360" level="System" insignificant="true">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-testscripts/ts_multi_instance.rb --name test_multi_instance_prestart</step>
+      </case>
+      <case name="grid_prestart_prevent" type="Functional" description="Test that external application is killed by applifed" timeout="360" level="System" insignificant="true">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-testscripts/ts_prestart_prevent.rb --name test_grid_prestart_prevent</step>
+      </case>
+      <case name="cmdline_prestart_prevent" type="Functional" description="Test that external application is killed by applifed" timeout="360" level="System" insignificant="true">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applifed-testscripts/ts_prestart_prevent.rb --name test_cmdlile_prestart_prevent</step>
+      </case>
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <get>
+          <file>/tmp/mw_applifed_result.txt</file>
+      </get>
+    </set>
+
+  </suite>
+</testdefinition>
+
+

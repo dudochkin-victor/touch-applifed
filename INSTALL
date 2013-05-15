@@ -1,0 +1,32 @@
+BUILD & INSTALL
+===============
+
+Applifed uses the CMake build system.
+
+
+Configure
+---------
+
+Applifed only:
+
+./configure
+
+Applifed + tests:
+
+BUILD_TESTS=1 ./configure
+
+
+Build
+-----
+
+make
+
+
+Install
+-------
+
+make install
+
+
+-- Jussi Lind <jussi.lind@nokia.com>
+

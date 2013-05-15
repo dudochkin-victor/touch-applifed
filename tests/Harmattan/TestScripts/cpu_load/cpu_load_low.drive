@@ -1,0 +1,6 @@
+CPU_LOAD=40
+PRESTART=/usr/share/applifed-testscripts/cpu_load/cpu_load.conf
+EXIT_WITH_DELAY=50
+
+
+

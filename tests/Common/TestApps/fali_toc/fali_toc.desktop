@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Terminates On Close
+Icon=icon-l-video
+Exec=fali_toc
+X-Maemo-Service=com.nokia.fali_toc
+Categories=X-MeeGo;Demos;
+OnlyShowIn=X-MeeGo;

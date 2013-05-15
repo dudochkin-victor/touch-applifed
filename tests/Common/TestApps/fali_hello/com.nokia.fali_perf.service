@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=com.nokia.fali_perf
+Exec=/usr/bin/fali_perf -prestart
+

@@ -1,0 +1,7 @@
+subsystem: Direct UI Framework
+src-pkg: applifed
+interface: applifed.conf
+scope: Internal
+type: file
+files: /etc/prestart/nokia.conf
+state: unstable

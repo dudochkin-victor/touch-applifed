@@ -1,0 +1,189 @@
+README for Applifed
+===================
+
+What is this?
+-------------
+
+  Applifed is the MeeGo Handset application life cycle daemon. Currently it  
+  prestarts and manages MeeGo Touch applications that are
+  _configured_to_be_prestartable_.
+
+  Configured to be prestartable means:
+  
+  1) Application supports prestarting and has -prestart added to its D-Bus service file.
+  2) Application is mentioned in Applifed's config file
+
+  Please refer to MeeGo Touch documentation for more information.
+
+Configuration file
+------------------
+
+  In MeeGo Handset, the configuration file is located at /etc/prestart/.
+  This is an XML-file containing settings for Applifed itself and a listing of
+  the applications to be prestarted during boot. This file is part of the platform
+  configuration and cannot be modified by applications.
+
+  Structure of the config file:
+  
+  <?xml version="1.0"?>
+  <applifed [ATTRIBUTES]>
+  
+    <!-- Prestarts inited by applifed -->
+    <application [ATTRIBUTES]/>
+     ...
+    <application [ATTRIBUTES]/>
+    
+    <!-- White list for lazily shutdowned applications not managed
+         by applifed -->
+    <allow_lazy_shutdown [ATTRIBUTES]/>
+      ...
+    <allow_lazy_shutdown [ATTRIBUTES]/>
+    
+  </applifed>
+  
+
+  Attributes in <applifed> element explained:
+
+    Purpose of this element is to provide some global settings.
+  
+    default_cpu_load_threshold  : Start prestart actions when cpu load drops below this
+                                  percentage (1..100) by default. 
+                                  
+    default_re-prestart_trigger : Perform a forced re-prestart when application's release count
+                                  exceeds this value by default.
+                                  
+    cpu_load_polling_delay      : Poll CPU load from /proc/stat periodically using this delay
+                                  when there's something to prestart. In seconds.
+                                  
+    re-prestart_delay           : Delay to wait after screen goes blank before starting 
+                                  possible forced re-prestarts. In seconds.
+
+
+  Attributes in <application> element explained:
+
+    Purpose of this element is to add a prestartable service.
+
+    name                           : Application name (used only for logging).
+    
+    service                        : D-Bus service to be prestarted.
+
+    priority                       : Priority in the prestart queue. Smaller value means greater priority.
+
+    cpu_load_threshold             : Override global default_cpu_load_threshold.
+
+    re-prestart_trigger            : Override global default_re-prestart_trigger.
+
+    forced_re-prestart_not_allowed : Never perform forced re-prestart for this application.
+
+
+  Attributes in <allow_lazy_shutdown> element explained:
+
+    Purpose of this element is to white-list lazily shutdownable applications not managed by
+    applifed. Applications added with <application> are automatically white-listed.
+
+    binary_path : Don't kill lazily shutdowned external application if its binary path matches this.
+
+
+  Example configuration file:
+
+  <?xml version="1.0"?>
+  <applifed default_cpu_load_threshold="50" cpu_load_polling_delay="2" re-prestart_delay="3600">
+  
+    <!-- Prestarts inited by applifed -->
+    <application name="Foo" service="org.maemo.Foo" priority="0" cpu_load_threshold="25"/>
+    <application name="Bar" service="org.maemo.Bar" priority="-1"/>
+    <application name="Humppa" service="org.maemo.Humppa" priority="-1" re-prestart_trigger="5"/>
+    <application name="Delme" service="org.maemo.Delme" priority="2" forced_re-prestart_not_allowed="1"/>
+    
+    <!-- White list for lazily shutdowned applications not managed
+         by applifed -->
+    <allow_lazy_shutdown binary_path="/usr/bin/application1"/>
+    <allow_lazy_shutdown binary_path="/usr/bin/application2"/>
+  </applifed>
+    
+
+How does it work
+----------------
+
+  Applifed doesn't fork by itself, it uses D-Bus to do the actual launch
+  of the prestarted processes. Applifed keeps track of the states of
+  the prestarted applications by using D-Bus and X11 "snooping".
+
+  Detailed description about how it goes (see src/prestarter.h):
+
+  1) Prestarter reads the information about which D-Bus services should be prestarted
+     (/etc/prestart/). It is assumed, that the corresponding applications gets started
+     with -prestart and are MeeGo Touch applications. -prestart should be set in their
+     .service files. Prestart activities are started by calling startPrestartActions()
+     after readConfiguration().
+ 
+  2) Prestarter pushes applications to be prestarted to a priority queue (sorted with
+     respect to their priority-values defined in the config. Smaller priority value
+     means greater importance.
+ 
+  3) CPU load measurement is started. /proc/stat is used and the value is periodically
+     updated. On each update Prestarter checks if the load is below given threshold,
+     and if so, it prestarts the next application in the queue. If the queue gets empty
+     then the CPU load polling is stopped and Prestarter does nothing.
+ 
+  4) Prestarter monitors D-Bus (using QDBusServiceWatcher)and if it notices that a
+     prestarted service ended (died or was closed by the user) it gets pushed back to the
+     queue and CPU load measurement is started again (re-prestarting). Prestarter snoops
+     X11 events so that it knows if a prestarted service shows its UI. A service cannot
+     be re-prestarted without showing its UI. This effectively prevents a prestart-loop
+     of a crashing application.
+
+  5) Applifed knows how many times each prestarted application has returned to the prestarted
+     state and may re-prestart them if the count exceeds the given limit. Applications are 
+     re-prestarted only when screen goes blank and some time has elapsed. This behaviour
+     can be configured in the configuration file.
+
+     Note that there are two kinds of re-prestarting:
+ 
+     - Re-prestarting due to a crash (this happens immediately)
+     - Re-prestarting due to release count (this happens after screen has blanked)
+
+  6) Applications performing unauthorized (not prestarted by applifed nor white-listed
+     in the configuration file) lazy shutdown are killed. This is triggered by the Daemon.
+
+Logging
+-------
+
+  By default, Applifed logs to /tmp/applifed.log. This can be changed with --log parameter.
+
+Test mode
+---------
+
+  Applifed implements a special test mode, that is used in functional tests. This is 
+  triggered by giving --test to Applifed. In test mode, Applifed waits for commands to 
+  be appeared in stdin. 
+
+  Accepted commands in test mode at the moment are:
+ 
+  EXIT               : Exit the program immediately.
+  EXIT_WITH_DELAY=%d : Exit the program after delay of %d seconds.
+  PRESTART=%s        : Execute prestarts from the given config %s.
+  CPU_LOAD=%d        : Force (fake) CPU-load to the given value.
+  SCREEN_BLANKED     : Force (fake) screen blank. This triggers re-prestarting routines.
+  SCREEN_UNBLANKED   : Force (fake) screen unblank. This cancels re-prestarting routines. 
+  SCREEN_BLANKED_WITH_DELAY=%d   : Force (fake) screen blank with delay. 
+                                   This triggers re-prestarting routines after a delay %d seconds. 
+
+Relevant source files
+---------------------
+
+  applifeservice.* : D-Bus service for Applifed
+  cpuload.*        : CPU load measurement routines
+  daemon.*         : Daemon main class
+  global.*         : Some global definitions
+  logger.*         : Logging wrapper
+  prestartapp.*    : Structure representing a prestartable app
+  prestarter.*     : Prestart routines
+  prestartparser.* : Parser for prestart config
+  systemstate.*    : Class providing some system info & test mode
+  main.cpp         : The entry point
+
+  
+  -- Jussi Lind <jussi.lind@nokia.com>
+
+

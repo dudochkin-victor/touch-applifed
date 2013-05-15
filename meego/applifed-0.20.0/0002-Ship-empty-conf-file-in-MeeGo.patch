@@ -1,0 +1,51 @@
+From e841fb7d8a62098d28c792e06f78f6a747575b83 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Pertti=20Kellom=C3=A4ki?= <pertti.kellomaki@nokia.com>
+Date: Tue, 7 Sep 2010 11:19:27 +0300
+Subject: [PATCH] Ship empty conf file in MeeGo.
+
+---
+ CMakeLists.txt      |    8 ++++++--
+ prestart/empty.conf |   15 +++++++++++++++
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+ create mode 100644 prestart/empty.conf
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f360a25..f279246 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,5 +49,9 @@ if ($ENV{BUILD_TESTS})
+ 	add_subdirectory(tests/bug-tests)
+ endif ($ENV{BUILD_TESTS})
+ 
+-# Install configuration file here
+-install(FILES prestart/nokia.conf DESTINATION /etc/prestart)
++# Install configuration file. On MeeGo, just ship an empty conf.
++if ($ENV{MEEGO})
++        install(FILES prestart/empty.conf DESTINATION /etc/prestart RENAME nokia.conf)
++else (NOT $ENV{MEEGO})
++        install(FILES prestart/nokia.conf DESTINATION /etc/prestart)
++endif ($ENV{MEEGO})
+diff --git a/prestart/empty.conf b/prestart/empty.conf
+new file mode 100644
+index 0000000..65af7e8
+--- /dev/null
++++ b/prestart/empty.conf
+@@ -0,0 +1,15 @@
++<?xml version="1.0"?>
++<applifed default_cpu_load_threshold="25" cpu_load_polling_delay="1" re-prestart_delay="3600" default_re-prestart_trigger="5">
++
++    <!-- Services prestarted by applifed -->
++
++    <!-- Allow lazy shutdown for these applications not managed
++         by applifed -->
++    <allow_lazy_shutdown binary_path="/usr/bin/devicelockd"/>
++    <allow_lazy_shutdown binary_path="/usr/bin/celluid"/>
++    <allow_lazy_shutdown binary_path="/usr/bin/sysuid"/>
++    <allow_lazy_shutdown binary_path="/usr/bin/mstartup"/>
++    <allow_lazy_shutdown binary_path="/usr/bin/duihome"/>
++
++</applifed>
++
+-- 
+1.7.0.4
+

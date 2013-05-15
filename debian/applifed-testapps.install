@@ -1,0 +1,35 @@
+# Helloworld test app
+usr/share/applications/fali_hello.desktop
+usr/share/applications/fali_hello1.desktop
+usr/share/applications/fali_close.desktop
+usr/share/dbus-1/services/com.nokia.fali_hello.service
+usr/share/dbus-1/services/com.nokia.fali_hello1.service
+usr/share/dbus-1/services/com.nokia.fali_close.service
+usr/bin/fali_hello1
+usr/bin/fali_hello
+usr/bin/fali_close
+
+# TerminateOnClose test app
+usr/bin/fali_toc
+usr/share/dbus-1/services/com.nokia.fali_toc.service
+usr/share/applications/fali_toc.desktop
+
+# Multi-window test apps
+usr/bin/close-event
+usr/share/dbus-1/services/com.nokia.fali_mw1.service
+usr/bin/fali_mw1
+usr/share/dbus-1/services/com.nokia.fali_mw2.service
+usr/bin/fali_mw2
+usr/share/dbus-1/services/com.nokia.fali_mw3.service
+usr/bin/fali_mw3
+
+#Multi-Instance test apps
+usr/bin/fali_multiapp
+
+# Application that hogs memory
+usr/bin/memoryhog
+
+# Hello world test app
+usr/bin/fali_perf
+usr/share/dbus-1/services/com.nokia.fali_perf.service
+

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Multi W3
+Icon=Icon-messages
+Exec=dbus-send --dest=com.nokia.MultiWindow3 --type="method_call" / com.nokia.MultipleWindowsIf.launchWindow int32:"3"
+Categories=X-MeeGo;
+

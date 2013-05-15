@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+pgrep applifed ||
+{
+    if [ -x "/usr/sbin/policy-rc.d" ]; then
+        ( policy-rc.d && start xsession-default/applifed ) || true
+    else
+        start xsession-default/applifed
+    fi
+}
+
+

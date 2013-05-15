@@ -1,0 +1,10 @@
+* Fri Sep 17 2010 Pertti Kellomäki <pertti.kellomaki@nokia.com> - 0.20.0
+- Updated upstream version.
+- Packaged tests.
+- Moved testing related binaries from /usr/share to /usr/lib.
+- Fix dependence to /usr/bin/ruby1.8.
+- Ship empty configuration file on MeeGo.
+- Install .desktop file in /etc/xdg/autostart to start applifed in UI session.
+
+* Mon Jul 12 2010 Pertti Kellomäki <pertti.kellomaki@nokia.com> - 0.17.0
+- Initial packaging.

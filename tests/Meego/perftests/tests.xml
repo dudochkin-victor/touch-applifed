@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<testdefinition version="0.1">
+
+<!-- Test suite, name mandatory - the same as test package name -->
+  <!-- Schema: https://projects.maemo.org/docs/testing/xml-definition.html -->
+  <suite name="applifed-M-performance-tests" domain="Application framework"> 
+
+    <set name="commandline-startup" description="Applifed prestart performance tests" feature="AF Application prestarting functionality" requirement="300105">  
+        <pre_steps>
+            <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+        </pre_steps>
+
+      <case name="PerfTest1" type="Performance" description="Measure prestart performance" timeout="360" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 `pyversions -d` /usr/share/applifed-M-testscripts/test-perf-prestart.py -a /usr/bin/fali_perf &gt; /tmp/prestart_perf.txt</step>
+      </case>
+
+      <!-- Swap tests commented off temporalily -->
+
+      <!-- <case name="SwapOn" type="Performance" description="Turn the swap on" timeout="360" level="System">
+          <step expected_result="0">modprobe mtdswap partitions=4</step>
+          <step expected_result="0">swapon /dev/mtdswap4</step>
+          <step expected_result="0">[ $(free |grep Swap | awk '{print $2}') -gt 256000 ]</step>
+      </case>
+
+      <case name="Prestart2" type="Performance" description="Measure prestart performance when everything is swapped" timeout="1200" level="System">
+          <step expected_result="0">source /tmp/session_bus_address.user; DISPLAY=:0 `pyversions -d` /usr/share/applifed-M-testscripts/test-perf-prestart.py -a /usr/bin/fali_perf -s &gt; /tmp/prestart_perf_swap_on.txt</step>
+      </case> -->
+
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <get>
+          <file>/tmp/prestart_perf.txt</file>
+          <!-- <file>/tmp/prestart_perf_swap_on.txt</file> -->
+      </get>
+    </set>
+
+    <set name="AppGrid-startup" description="Prestart startup time from application grid" feature="AF Application prestarting functionality" requirement="300105">  
+        <pre_steps>
+            <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+        </pre_steps>
+
+      <case name="Prestart_grid" type="Performance" description="Measure prestarted application startup application grid" timeout="500" level="System" insignificant="true">
+          <step expected_result="0"> source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applauncherd-testscripts/test-perf.rb name test_performance -- -a fali_hello1 -p "fali_hello1 -prestart &amp;" -b "fali_hello1" &gt; /tmp/perf_prestart_grid.txt</step>
+      </case>
+
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <get>
+          <file>/tmp/perf_prestart_grid.txt</file>
+      </get>
+    </set>
+
+    <set name="Commandline-startup" description="Prestart startup time from command line" feature="AF Application prestarting functionality" requirement="300105">  
+        <pre_steps>
+            <step>/usr/bin/waitloadavg.rb -l 1.0 -p 1.0 -t 120</step>
+        </pre_steps>
+
+      <case name="Prestart_command_line" type="Performance" description="Measure prestarted application startup from command line" timeout="500" level="System" insignificant="true">
+          <step expected_result="0">  source /tmp/session_bus_address.user; DISPLAY=:0 /usr/share/applauncherd-testscripts/test-perf.rb name test_performance -- -c "dbus-send --dest=com.nokia.fali_hello1 --type=\"method_call\" /org/maemo/m com.nokia.MApplicationIf.launch" -p "fali_hello1 -prestart &amp;" -b "fali_hello1" &gt; /tmp/perf_prestart_command_line.txt</step>
+      </case>
+
+      <environments>
+          <scratchbox>false</scratchbox>
+          <hardware>true</hardware>    
+      </environments>
+
+      <get>
+          <file>/tmp/perf_prestart_command_line.txt</file>
+      </get>
+    </set>
+
+  </suite>
+</testdefinition>
+
+

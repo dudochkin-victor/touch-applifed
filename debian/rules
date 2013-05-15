@@ -1,0 +1,77 @@
+#!/usr/bin/make -f
+
+#include /usr/share/cdbs/1/rules/debhelper.mk
+#include /usr/share/cdbs/1/class/cmake.mk
+
+configure: configure-stamp
+configure-stamp: 
+	dh_testdir
+	# Configure Applifed to be build with tests
+	BUILD_TESTS=1 HARMATTAN=1 ./configure
+
+	touch configure-stamp
+
+build: build-stamp
+build-stamp: configure-stamp
+	dh_testdir
+	
+	make
+    
+	touch build-stamp
+    
+clean:
+	dh_testdir
+	dh_testroot
+    
+	rm -f build-stamp configure-stamp
+	rm -f CMakeCache.txt
+
+	dh_clean
+    
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+	DESTDIR=debian/tmp make install
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+	dh_installdocs
+	dh_install --sourcedir=debian/tmp -v 
+#	dh_installexamples
+#	dh_install
+#	dh_installmenu
+#	dh_installdebconf	
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+#	dh_installman
+	dh_link
+	dh_strip 
+	dh_compress
+	dh_fixperms
+#	dh_perl
+#	dh_python
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb 
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure
+

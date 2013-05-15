@@ -1,0 +1,110 @@
+From 94a83e0fdf4c73d642eebaa0428fac9250117353 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Pertti=20Kellom=C3=A4ki?= <pertti.kellomaki@nokia.com>
+Date: Fri, 3 Sep 2010 15:10:48 +0300
+Subject: [PATCH] Use /usr/bin/ruby instead of /usr/bin/ruby1.8
+
+---
+ tests/TestScripts/cp-service.rb                    |    2 +-
+ tests/TestScripts/cpu_load/tc_cpu_load.rb          |    2 +-
+ tests/TestScripts/fautils.rb                       |    2 +-
+ .../ts_periodic_re_prestart.rb                     |    2 +-
+ tests/TestScripts/tc_applifed_one_instance.rb      |    2 +-
+ tests/TestScripts/tc_daemonize.rb                  |    2 +-
+ tests/TestScripts/tc_prestart_preventing.rb        |    2 +-
+ tests/TestScripts/ts_mwtests.rb                    |    2 +-
+ tests/TestScripts/ts_prestart.rb                   |    2 +-
+ 9 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/tests/TestScripts/cp-service.rb b/tests/TestScripts/cp-service.rb
+index 861a7aa..f89a565 100755
+--- a/tests/TestScripts/cp-service.rb
++++ b/tests/TestScripts/cp-service.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/cpu_load/tc_cpu_load.rb b/tests/TestScripts/cpu_load/tc_cpu_load.rb
+index 9edc147..46e38a9 100755
+--- a/tests/TestScripts/cpu_load/tc_cpu_load.rb
++++ b/tests/TestScripts/cpu_load/tc_cpu_load.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/fautils.rb b/tests/TestScripts/fautils.rb
+index c435561..b5accd1 100644
+--- a/tests/TestScripts/fautils.rb
++++ b/tests/TestScripts/fautils.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/periodic_re_prestart/ts_periodic_re_prestart.rb b/tests/TestScripts/periodic_re_prestart/ts_periodic_re_prestart.rb
+index a8959df..7f3b75c 100755
+--- a/tests/TestScripts/periodic_re_prestart/ts_periodic_re_prestart.rb
++++ b/tests/TestScripts/periodic_re_prestart/ts_periodic_re_prestart.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/tc_applifed_one_instance.rb b/tests/TestScripts/tc_applifed_one_instance.rb
+index d7b384a..4733623 100755
+--- a/tests/TestScripts/tc_applifed_one_instance.rb
++++ b/tests/TestScripts/tc_applifed_one_instance.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/tc_daemonize.rb b/tests/TestScripts/tc_daemonize.rb
+index e005246..f2af2d9 100644
+--- a/tests/TestScripts/tc_daemonize.rb
++++ b/tests/TestScripts/tc_daemonize.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/tc_prestart_preventing.rb b/tests/TestScripts/tc_prestart_preventing.rb
+index e8eb0ce..5d40fce 100755
+--- a/tests/TestScripts/tc_prestart_preventing.rb
++++ b/tests/TestScripts/tc_prestart_preventing.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/ts_mwtests.rb b/tests/TestScripts/ts_mwtests.rb
+index 772c225..baf1a84 100755
+--- a/tests/TestScripts/ts_mwtests.rb
++++ b/tests/TestScripts/ts_mwtests.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+diff --git a/tests/TestScripts/ts_prestart.rb b/tests/TestScripts/ts_prestart.rb
+index 42a4b32..281d446 100755
+--- a/tests/TestScripts/ts_prestart.rb
++++ b/tests/TestScripts/ts_prestart.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/ruby
+ #
+ # Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ # All rights reserved.
+-- 
+1.7.0.4
+

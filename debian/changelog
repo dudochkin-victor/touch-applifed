@@ -1,0 +1,301 @@
+applifed (0.20.9) stable; urgency=low
+
+  * Fixes: NB#212832 - X Error: BadWindow when application is terminated
+  * Changes: Kill prestarted applications when applifed terminates. One new unit test.
+  * Changes: Refactor lock check so that it works also for --fork.
+  
+ -- Jussi Lind <jussi.lind@nokia.com>  Mon, 13 Dec 2010 12:58:13 +0200
+
+applifed (0.20.8) stable; urgency=low
+
+  * Changes: Added the new startup time tests
+  * Implemented: SWP#DUI-4283
+  * Fixes: NB#211151 - Contacts application not prestarted
+
+ -- Olli Leppanen <olli.leppanen@nokia.com>  Thu, 26 Nov 2010 13:54:34 +0200
+
+applifed (0.20.7) stable; urgency=low
+
+  * Changes: scope field added to the api file 
+  * Changes: testapps page title set as the application name
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Thu, 04 Nov 2010 09:54:34 +0200
+
+applifed (0.20.6) stable; urgency=low
+
+  * Changes: acceptance and validation tags removed for tests packages 
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Tue, 02 Nov 2010 12:03:58 +0200
+
+applifed (0.20.5) stable; urgency=low
+
+  * Tests fixes
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Mon, 01 Nov 2010 11:33:41 +0200
+
+applifed (0.20.4) stable; urgency=low
+
+  * Changes: Test package dependency for python and ruby added
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Tue, 12 Oct 2010 15:32:54 +0300
+
+applifed (0.20.3) stable; urgency=low
+
+  * Changes: Package dependency changed from testrunner -> testrunner-lite
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Tue, 12 Oct 2010 11:58:16 +0300
+
+applifed (0.20.2) stable; urgency=low
+  * Fixes: NB#196398
+  * Removed -Wno-psabi from CXX_FLAGS.
+
+ -- Juha Lintula <juha.lintula@nokia.com>  Wed, 06 Oct 2010 13:25:05 +0300
+
+applifed (0.20.1) stable; urgency=low
+
+  * Fixes: NB#194059
+  * Added -Wno-psabi to CXX_FLAGS in order to suppress va_list mangling warnings originating from Qt.
+  * Code cleanup done for tests scripts
+  * Fixed crashing multiwindow testapps
+  * ruby1.8 changed to ruby in the tests scripts
+  * Few minor modifications done to new perf test and added the test criteria of 0.75sec
+  * Stopping applifed before performance test run
+  * Performance test application's visibility signal is based on the visibility of the window, not of the page.
+  * Documentation of the config file improved in README.
+  * Performance test script stops the applifed during test run.
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Mon, 06 Sep 2010 10:44:04 +0300
+
+applifed (0.20.0) stable; urgency=low
+
+  * Matti renamed to TDriver
+  * Forced re-prestart functionality added
+  * Lazy shutdown killer added
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Fri, 03 Sep 2010 09:19:58 +0300
+
+applifed (0.19.0) stable; urgency=low
+
+  * Renamed applifed.conf to nokia.conf
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Wed, 25 Aug 2010 09:55:05 +0300
+
+applifed (0.18.0) stable; urgency=low
+
+  * Useless D-Bus service removed
+  * Lock file added 
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Wed, 12 Aug 2010 11:44:36 +0300
+
+applifed (0.17.0-1) stable; urgency=low
+
+  * Removed dialer from applifed.conf
+  * Fixes: NB#179073	
+
+ -- Olli Leppanen <olli.leppanen@nokia.com>  Fri, 09 Jul 2010 12:55:27 +0300
+
+applifed (0.16.0-1) stable; urgency=low
+
+  * Release count gets logged
+  * Release count and state reset for unregistered services
+  * Tests re-factored to run on scratchbox env
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Tue, 29 Jun 2010 16:55:27 +0300
+
+applifed (0.15.0-1) stable; urgency=low
+
+  * Release count logic added to PrestartApp
+  * Unit tests for PrestartApp added
+  * applifed-art-tests, applifed-bug-tests added
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Wed, 23 Jun 2010 17:04:41 +0300
+
+applifed (0.14.0-3) stable; urgency=low
+
+  * Multi-instance test disabled
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Fri, 18 Jun 2010 16:19:14 +0300
+
+applifed (0.14.0-2) stable; urgency=low
+
+  * Changes: Corrected the typo from tests.xml
+  * Fixes: NB#174931
+ 
+ -- Olli Leppanen <olli.leppanen@nokia.com>  Wed, 17 Jun 2010 15:12:22 +0300
+
+applifed (0.14.0-1) stable; urgency=low
+
+  * Changes: Applifed knows when prestarted application returns to the prestarted state
+  * Changes: applifed.conf temporarily renamed to applifed_fixed.conf
+  * Changes: added api-file into debian directory
+  * Changes: modified the default threshold value from applifed.conf 100->50
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Wed, 16 Jun 2010 15:12:22 +0300
+
+applifed (0.13.0-1) stable; urgency=low
+
+  * prestarting enabled, messaging-ui added to prestart
+  * multiwindow tests now refactored
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Tue, 08 Jun 2010 14:27:46 +0300
+
+applifed (0.12.0-4) stable; urgency=low
+
+  * Changes: Multiwindow and Dbus functional tests made insignificant
+  * Changes: Performance-tests now checks for the time limit
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Mon, 31 May 2010 15:18:20 +0300
+
+applifed (0.12.0-3) stable; urgency=low
+
+  * Changes: Disabled Multiwindow and DBUS functional tests
+
+ -- Nimika Keshri <nimika.1.keshri@nokia.com>  Wed, 26 May 2010 16:40:31 +0300
+
+applifed (0.12.0-2) stable; urgency=low
+
+  * Changes: Prestartable applications commented out from applifed.conf
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Mon, 17 May 2010 17:14:29 +0300
+
+applifed (0.12.0-1) stable; urgency=low
+
+  * Changes: Don't install applifed.conf so as to assist debug efforts of NB#168188
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Mon, 10 May 2010 12:06:25 +0300
+
+applifed (0.11.0-1) stable; urgency=low
+
+  * Changes: Added the requirement and feature fieds into tests.xml files
+  * Changes: Added the functional tests for CPU load based prestarting
+  * Implemented: SWP#DUI-2804
+	
+ -- Olli Leppanen <olli.leppanen@nokia.com>  Wed, 05 May 2010 12:27:00 +0300
+
+applifed (0.10.0-1) stable; urgency=low
+
+  * Changes: Added force CPU load feature into applifed test mode
+  * Changes: Corrected the tests that were broken because of change from testrunner.py to testrunner-lite
+
+ -- Olli Leppanen <olli.leppanen@nokia.com>  Tue, 04 May 2010 16:27:00 +0300
+
+applifed (0.9.0-1) stable; urgency=low
+
+  * Changes: Dead code removed from Prestarter
+  * Changes: Prestarter turned into a simple state-machine
+  * Changes: Multiple .prestart-files replaced with a single config file /etc/prestart/applifed.conf
+  * Implemented: SWP#DUI-2805
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Thu, 22 Apr 2010 15:57:26 +0300
+
+applifed (0.8.0-1) stable; urgency=low
+
+  * Changes: QDBusServiceWatcher engaged now that it's fixed in Qt 4.6.3
+  * Changes: Qt minimum version set to 4.6.3 in the build
+  * Changes: Prevented the re-prestart of a service when already re-prestarted
+  * Changes: Functional tests not dependent on DuiHome
+  * Changes: CPU-load-based prestart implemented
+  * Changes: Transition from DUI to MeeGo
+  * Implemented: SWP#DUI-2714  
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Mon, 22 Mar 2010 10:17:23 +0200
+
+applifed (0.7.0-1) stable; urgency=low
+
+  [ Olli Leppanen ]
+  * Changes: Small corrections to functional tests tests.xml file
+
+  [ Jussi Lind ]
+  * Changes: Made applifed fully D-Bus based so that it won't fork anymore.
+  * Fixes: NB#150751
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Mon, 22 Feb 2010 15:12:34 +0200
+
+applifed (0.6.0-1) stable; urgency=low
+
+  * Changes: Test package split to unit tests, functional tests
+             and performance tests.
+  * Changes: D-Bus method to perform "prestart + launch" in one call
+  * Changes: Logging always to /tmp/applifed.log
+  * Changes: Refactoring of Prestarter -class
+  * Changes: Unit tests for Prestarter added
+  * Changes: Unit tests for PrestartParser added
+  * Changes: Memory signal stuff removed
+  * Changes: Functional tests added 	
+  * Implemented: SWP#DUI-1669, SWP#DUI-1926  
+	
+ -- Juha Lintula <juha.lintula@nokia.com>  Fri, 29 Jan 2010 13:37:33 +0200
+
+applifed (0.5.1-1) stable; urgency=low
+
+  * Changes: Test package modified to be CI ready.
+
+ -- Juha Lintula <juha.lintula@nokia.com>  Mon, 18 Jan 2010 13:37:33 +0200
+
+applifed (0.5.0-1) stable; urgency=low
+
+  * Changes: A new test "only one applifed running" implemented.
+  * Changes: D-Bus service introduced.
+  * Changes: Re-prestart of apps that didn't get released is blocked.
+             If we get a MapNotify event for a window, then the
+             corresponding app is regarded as released and can be re-prestarted. 
+  * Fixed deb package re-installation.
+  * Added new test cases.
+  * Fixes: NB#150754
+  * Implemented: SWP#DUI-1921, SWP#DUI-1925, SWP#DUI-1929 
+	
+ -- Olli Leppanen <olli.leppanen@nokia.com>  Thu, 14 Jan 2010 14:24:41 +0200
+
+applifed (0.4.0-1) stable; urgency=low
+
+  * Changes: Logging improved
+  * Standard file descriptors redirected to /dev/null
+  * Fixes: NB#150804 - Installing applifed package leaves a ghost process /usr/bin/applifed in the background
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Wed, 16 Dec 2009 14:01:52 +0200
+
+applifed (0.3.0-3) stable; urgency=low
+
+  * Enabled prestart of camera-ui
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Mon, 14 Dec 2009 15:01:12 +0200
+
+applifed (0.3.0-2) stable; urgency=low
+
+  * Removed prestart of camera-ui temporarily
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Thu, 10 Dec 2009 11:39:25 +0200
+
+applifed (0.3.0-1) stable; urgency=low
+
+  * Removed XSession boot scripts
+  * Added prestart script for camera-ui
+
+ -- Antti Kervinen <antti.kervinen@nokia.com>  Mon, 07 Dec 2009 15:05:00 +0200
+
+applifed (0.3.0~2) unstable; urgency=low
+
+  * Syslog bug fixed
+  * Support for prestart priority added at the parser level
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Fri, 04 Dec 2009 16:41:18 +0200
+
+applifed (0.3.0~1) unstable; urgency=low
+
+  * Removed the installation of the startup script
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Fri, 04 Dec 2009 15:50:06 +0200
+
+applifed (0.2.0~1) unstable; urgency=low
+
+  * Added the initial version of prestart functionality
+  * Added initial test package
+  * Implemented: SWP#DUI-1552, SWP#DUI-1628, SWP#DUI-1636
+
+ -- Juha Lintula <juha.lintula@nokia.com>  Wed, 04 Nov 2009 10:35:58 +0200
+
+applifed (0.1-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Jussi Lind <jussi.lind@nokia.com>  Wed, 28 Oct 2009 12:27:28 +0200
